@@ -13,6 +13,15 @@ This is a webpack loader. It can inline SVG or MathML file to HTML, so that you 
 },
 ```
 
+or with html-loader:
+
+```js
+{
+  test: /\.html$/,
+  loader: 'html!markup-inline'
+},
+```
+
 ### Original HTML
 
 ```html
