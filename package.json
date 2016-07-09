@@ -1,0 +1,32 @@
+{
+  "name": "markup-inline-loader",
+  "version": "0.0.1",
+  "description": "inline markups to HTML: SVG, MathML, etc.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular-live/inline-markup-loader.git"
+  },
+  "keywords": [
+    "webpack",
+    "loader",
+    "svg",
+    "mathml",
+    "markup"
+  ],
+  "author": "Zhicheng Wang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/angular-live/inline-markup-loader/issues"
+  },
+  "homepage": "https://github.com/angular-live/inline-markup-loader#readme",
+  "devDependencies": {
+    "should": "^9.0.2"
+  },
+  "dependencies": {
+    "lodash": "^4.13.1"
+  }
+}
