@@ -16,6 +16,9 @@ describe('markup inline loader', function () {
   it('img', function () {
     load('<img src="./test.svg" />').trim().should.equal('<svg   ><path></path></svg>');
   });
+  it('other img', function () {
+    load('<img src="./test.jpg" />').trim().should.equal('<img src="./test.jpg" />');
+  });
   it('math', function () {
     load('<math src="./test.mml" />').trim().should.equal('<math style="display: block;"></math>');
   });
