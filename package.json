@@ -1,6 +1,6 @@
 {
   "name": "markup-inline-loader",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "inline markups to HTML: SVG, MathML, etc.",
   "main": "index.js",
   "scripts": {
