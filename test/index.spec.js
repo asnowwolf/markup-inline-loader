@@ -5,7 +5,9 @@ function load(content) {
   return loader.call({
     cacheable: function () {
     },
-    resourcePath: __filename
+    addDependency: function () {
+    },
+    context: __dirname
   }, content);
 }
 
