@@ -1,14 +1,14 @@
 {
   "name": "markup-inline-loader",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "inline markups to HTML: SVG, MathML, etc.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./test/index.spec.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/angular-live/inline-markup-loader.git"
+    "url": "git+https://github.com/asnowwolf/markup-inline-loader.git"
   },
   "keywords": [
     "webpack",
@@ -20,9 +20,9 @@
   "author": "Zhicheng Wang",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/angular-live/inline-markup-loader/issues"
+    "url": "https://github.com/asnowwolf/markup-inline-loader/issues"
   },
-  "homepage": "https://github.com/angular-live/inline-markup-loader#readme",
+  "homepage": "https://github.com/asnowwolf/markup-inline-loader#readme",
   "devDependencies": {
     "should": "^9.0.2"
   },
