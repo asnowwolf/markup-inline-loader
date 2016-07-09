@@ -6,23 +6,30 @@ This is a webpack loader. It can inline SVG or MathML file to HTML, so that you 
 
 ### Configuration
 
+```js
       {
         test: /\.html$/,
         loader: 'markup-inline'
       },
+```
 
 ### Original HTML
 
+```html
     <img class="icon" height="1em" src="../%common/images/icons/camera.svg" />
+```
 
 ### Translated HTML
 
+```svg
     <svg class="icon" height="1em" viewBox="0 0 1024 1404.416" xmlns="http://www.w3.org/2000/svg"><path d="M960 440.384h-256v-128c0-35.312-28.656-64-64-64h-256c-35.344 0-64 28.688-64 64v128h-128v-64h-128v64c-35.344 0-64 28.688-64 64v704c0 35.376 28.656 64 64 64h896c35.344 0 64-28.624 64-64v-704c0-35.312-28.656-64-64-64z m-512-64h128v64h-128v-64z m448 768h-768v-576h768v576z m-384-128c106.032 0 192-85.938 192-192s-85.968-192-192-192-192 85.938-192 192 85.968 192 192 192z m0-256c35.344 0 64 28.624 64 64s-28.656 64-64 64-64-28.624-64-64 28.656-64 64-64z"/></svg>
+```
 
 So we can apply css styles to `svg > path {}`.
 
 or
 
+```svg
     <?xml version="1.0" encoding="utf-8"?>
     <!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -39,9 +46,11 @@ or
         L125,52.1z M142,135.4H108l17-40.9L142,135.4z"/>
     </g>
     </svg>
+```
 
 So we can apply css animations to `svg > .text`, for example: 
 
+```css
     @keyframes rotate {
       from {
         transform: rotateY(0deg);
@@ -55,4 +64,4 @@ So we can apply css animations to `svg > .text`, for example:
       animation: 3s infinite rotate;
       transform-origin: center;
     }
-
+```
