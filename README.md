@@ -2,6 +2,10 @@
 
 This is a webpack loader. It can inline SVG or MathML file to HTML, so that you can apply css to embedded svg.
 
+## Demo
+
+[Click here](http://demo-starter.angular.live/#/about)
+
 ## Example 
 
 ### Configuration
