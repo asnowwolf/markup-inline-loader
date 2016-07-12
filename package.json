@@ -1,6 +1,6 @@
 {
   "name": "markup-inline-loader",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "inline markups to HTML: SVG, MathML, etc.",
   "main": "index.js",
   "scripts": {
@@ -26,5 +26,7 @@
   "devDependencies": {
     "should": "^9.0.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "svgo": "^0.6.6"
+  }
 }
