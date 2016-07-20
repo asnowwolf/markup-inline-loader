@@ -1,6 +1,6 @@
 {
   "name": "markup-inline-loader",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "inline markups to HTML: SVG, MathML, etc.",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/asnowwolf/markup-inline-loader#readme",
   "devDependencies": {
+    "mocha": "^2.5.3",
     "should": "^9.0.2"
   },
   "dependencies": {

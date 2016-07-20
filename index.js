@@ -1,4 +1,5 @@
-var PATTERN = /<(svg|img|math)\s+(.*?)src="(.*?)"(.*?)\/?>/gi;
+var SVG_PATTERN =   /<\s*svg\s+(.*?)\s*src\s*=\s*[\"\'](.*?\.svg)[\"\']\s*(.*?)\s*(\/>|>\s*<\/\s*svg\s*>)/gi;
+var MATH_PATTERN = /<\s*math\s+(.*?)\s*src\s*=\s*[\"\'](.*?\.mml)[\"\']\s*(.*?)\s*(\/>|>\s*<\/\s*math\s*>)/gi;
 
 var fs = require('fs');
 var path = require('path');
@@ -14,24 +15,23 @@ var svgo = new SVGO({
 
 module.exports = function (content) {
   var loader = this;
-  content = content.replace(PATTERN, function (match, element, preAttributes, fileName, postAttributes) {
-    var isSvgFile = path.extname(fileName).toLowerCase() === '.svg';
-    var isImg = element.toLowerCase() === 'img';
-
-    if (!isSvgFile && isImg) {
-      return match;
-    }
-
+  // process SVG
+  content = content.replace(SVG_PATTERN, function (match, preAttributes, fileName, postAttributes) {
     var filePath = path.join(loader.context, fileName);
     loader.addDependency(filePath);
     var fileContent = fs.readFileSync(filePath, {encoding: 'utf-8'});
-    if (isSvgFile) {
-      // It's callback, But it's sync
-      svgo.optimize(fileContent, function (result) {
-        fileContent = result.data;
-      });
-    }
-    return fileContent.replace(/^<svg/, '<svg ' + preAttributes + postAttributes + ' ');
+    // It's callback, But it's sync
+    svgo.optimize(fileContent, function (result) {
+      fileContent = result.data;
+    });
+    return fileContent.replace(/^<svg/i, '<svg ' + preAttributes + ' ' + postAttributes + ' ');
+  });
+  // process MathML
+  content = content.replace(MATH_PATTERN, function (match, preAttributes, fileName, postAttributes) {
+    var filePath = path.join(loader.context, fileName);
+    loader.addDependency(filePath);
+    var fileContent = fs.readFileSync(filePath, {encoding: 'utf-8'});
+    return fileContent.replace(/^<math/i, '<math ' + preAttributes + ' ' + postAttributes + ' ');
   });
   return content;
 };
