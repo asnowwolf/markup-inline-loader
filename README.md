@@ -29,7 +29,7 @@ or with html-loader:
 ### Original HTML
 
 ```html
-<img class="icon" height="1em" src="../%common/images/icons/camera.svg" />
+<svg class="icon" height="1em" src="../%common/images/icons/camera.svg" />
 ```
 
 ### Translated HTML
