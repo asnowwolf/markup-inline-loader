@@ -13,6 +13,7 @@ var svgo = new SVGO({
 });
 
 module.exports = function (content) {
+  this.cacheable && this.cacheable();
   var loader = this;
   content = content.replace(PATTERN, function (match, element, preAttributes, fileName, postAttributes) {
     var isSvgFile = path.extname(fileName).toLowerCase() === '.svg';
