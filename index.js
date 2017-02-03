@@ -15,6 +15,7 @@ var svgo = new SVGO({
 module.exports = function (content) {
   this.cacheable && this.cacheable();
   var loader = this;
+  var loaderUtils = require('loader-utils');
   content = content.replace(PATTERN, function (match, element, preAttributes, fileName, postAttributes) {
     var isSvgFile = path.extname(fileName).toLowerCase() === '.svg';
     var isImg = element.toLowerCase() === 'img';
@@ -24,6 +25,7 @@ module.exports = function (content) {
     }
 
     var filePath = path.join(loader.context, fileName);
+    filePath = loaderUtils.urlToRequest(filePath, '/');
     loader.addDependency(filePath);
     var fileContent = fs.readFileSync(filePath, {encoding: 'utf-8'});
     if (isSvgFile) {
