@@ -1,4 +1,4 @@
-const PATTERN = /<(svg|img|math)\s+(.*?)src="(.*?)"(.*?)\/?>/gi;
+const PATTERN = /<(svg|img|math|i)\s+(.*?)src="(.*?)"(.*?)\/?>/gi;
 
 const fs = require('fs');
 const path = require('path');
@@ -23,8 +23,9 @@ module.exports = function(content) {
   let replacer = function(match, element, preAttributes, fileName, postAttributes, offset, string, done) {
     const isSvgFile = path.extname(fileName).toLowerCase() === '.svg';
     const isImg = element.toLowerCase() === 'img';
+    const isIcon = element.toLowerCase() === 'i';
 
-    if (!isSvgFile && isImg) {
+    if (!isSvgFile && (isImg || isIcon)) {
       done(null, match);
     } else {
       const filePath = loaderUtils.urlToRequest(fileName, options.root);
