@@ -8,7 +8,13 @@ var svgo = new SVGO({
   plugins: [
     {
       removeTitle: true
-    }
+    },
+    {
+      removeUselessStrokeAndFill: false,
+    },
+    {
+      removeUnknownsAndDefaults: false,
+    },
   ]
 });
 
