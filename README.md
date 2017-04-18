@@ -6,23 +6,82 @@ This is a webpack loader. It can inline SVG or MathML file to HTML, so that you 
 
 [Click here](http://demo-starter.angular.live/#/about)
 
-## Example 
+## Example
 
 ### Configuration
 
-```js
+```json
 {
-  test: /\.html$/,
-  loader: 'markup-inline'
+  "test": /\.html$/,
+  "use": [
+    "raw-loader",
+    {
+      loader: "markup-inline-loader",
+      "options": {
+        svgo: {
+          plugins: [
+            {
+              removeTitle: true
+            },
+            {
+              removeUselessStrokeAndFill: false,
+            },
+            {
+              removeUnknownsAndDefaults: false,
+            },
+          ]
+        }
+      }
+    }
+  ]
 },
 ```
 
-or with html-loader:
+```js
+{
+  test: /\.html$/,
+  use: 'markup-inline-loader',
+},
+```
+
+Or with `html-loader`:
 
 ```js
 {
   test: /\.html$/,
-  loader: 'html!markup-inline'
+  use: [
+    'html',
+    'markup-inline-loader',
+  ],
+},
+```
+
+Or with `html-loader` and a SVGO configuration. By default `markup-inline-loader` only enables the removeTitle plugin. You can overwrite this default behavior with following example:
+
+```js
+{
+  test: /\.html$/,
+  use: [
+    'html',
+    {
+      loader: 'markup-inline-loader',
+      options: {
+        svgo: {
+          plugins: [
+            {
+              removeTitle: true,
+            },
+            {
+              removeUselessStrokeAndFill: false,
+            },
+            {
+              removeUnknownsAndDefaults: false,
+            },
+          ],
+        },
+      },
+    },
+  ],
 },
 ```
 
@@ -63,7 +122,7 @@ or
 </svg>
 ```
 
-So we can apply css animations to `svg > .text`, for example: 
+So we can apply css animations to `svg > .text`, for example:
 
 ```css
 @keyframes rotate {
