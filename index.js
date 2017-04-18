@@ -4,24 +4,21 @@ var fs = require('fs');
 var path = require('path');
 var SVGO = require('svgo');
 
-var svgo = new SVGO({
+var SVGOConfiguration = {
   plugins: [
     {
-      removeTitle: true
+      removeTitle: true,
     },
-    {
-      removeUselessStrokeAndFill: false,
-    },
-    {
-      removeUnknownsAndDefaults: false,
-    },
-  ]
-});
+  ],
+};
 
 module.exports = function (content) {
   this.cacheable && this.cacheable();
   var loader = this;
   var loaderUtils = require('loader-utils');
+  var options = loaderUtils.getOptions(this) || {};
+  var svgo = new SVGO(options.svgo || SVGOConfiguration);
+
   content = content.replace(PATTERN, function (match, element, preAttributes, fileName, postAttributes) {
     var isSvgFile = path.extname(fileName).toLowerCase() === '.svg';
     var isImg = element.toLowerCase() === 'img';
