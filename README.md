@@ -10,33 +10,6 @@ This is a webpack loader. It can inline SVG or MathML file to HTML, so that you 
 
 ### Configuration
 
-```json
-{
-  "test": /\.html$/,
-  "use": [
-    "raw-loader",
-    {
-      loader: "markup-inline-loader",
-      "options": {
-        svgo: {
-          plugins: [
-            {
-              removeTitle: true
-            },
-            {
-              removeUselessStrokeAndFill: false,
-            },
-            {
-              removeUnknownsAndDefaults: false,
-            },
-          ]
-        }
-      }
-    }
-  ]
-},
-```
-
 ```js
 {
   test: /\.html$/,
