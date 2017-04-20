@@ -1,4 +1,4 @@
-var PATTERN = /<(svg|img|math)\s+(.*?)src="(.*?)"(.*?)\/?>/gi;
+var PATTERN = /<(svg|img|math)\s+(.*?)src(\s*)=(\s*)"(.*?)"(.*?)\/?>/gi;
 
 var fs = require('fs');
 var path = require('path');
@@ -19,7 +19,7 @@ module.exports = function (content) {
   var options = loaderUtils.getOptions(this) || {};
   var svgo = new SVGO(options.svgo || SVGOConfiguration);
 
-  content = content.replace(PATTERN, function (match, element, preAttributes, fileName, postAttributes) {
+  content = content.replace(PATTERN, function (match, element, preAttributes, space1, space2, fileName, postAttributes) {
     var isSvgFile = path.extname(fileName).toLowerCase() === '.svg';
     var isImg = element.toLowerCase() === 'img';
 
