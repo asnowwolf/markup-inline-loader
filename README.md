@@ -23,7 +23,7 @@ Or with `html-loader`:
 {
   test: /\.html$/,
   use: [
-    'html',
+    'html-loader',
     'markup-inline-loader',
   ],
 },
@@ -35,7 +35,7 @@ Or with `html-loader` and a SVGO configuration. By default `markup-inline-loader
 {
   test: /\.html$/,
   use: [
-    'html',
+    'html-loader',
     {
       loader: 'markup-inline-loader',
       options: {
