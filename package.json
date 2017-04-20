@@ -4,7 +4,7 @@
   "description": "inline markups to HTML: SVG, MathML, etc.",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha ./test/index.spec.js"
+    "test": "mocha ./test/index.spec.js"
   },
   "repository": {
     "type": "git",
