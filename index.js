@@ -28,7 +28,7 @@ module.exports = function (content) {
     const isImg = tagName.toLowerCase() === 'img';
     const meetStrict = !strict || new RegExp(`[^\w-](data-)?${strict}[^\w-]`).test(matched);
 
-    if (!isSvgFile && isImg || !meetStrict) {
+    if (isImg && !isSvgFile || !meetStrict) {
       return matched;
     }
 
