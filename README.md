@@ -145,3 +145,13 @@ svg > .text {
   transform-origin: center;
 }
 ```
+
+## Contributors
+
+<https://github.com/indirectlylit>
+
+<https://github.com/premkumar-gg>
+
+<https://github.com/boschr>
+
+Thank you!
