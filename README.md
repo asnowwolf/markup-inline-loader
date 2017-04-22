@@ -2,66 +2,99 @@
 
 This is a webpack loader. It can inline SVG or MathML file to HTML, so that you can apply css to embedded svg.
 
-## Demo
-
-[Click here](http://demo-starter.angular.live/#/about)
-
 ## Example
 
 ### Configuration
 
 ```js
-{
-  test: /\.html$/,
-  use: 'markup-inline-loader',
-},
+const rules = [
+  {
+    test: /\.html$/,
+    use: 'markup-inline-loader',
+  },
+];
 ```
 
 Or with `html-loader`:
 
 ```js
-{
-  test: /\.html$/,
-  use: [
-    'html-loader',
-    'markup-inline-loader',
-  ],
-},
+const rules = [
+  {
+    test: /\.html$/,
+    use: [
+      'html-loader',
+      'markup-inline-loader',
+    ],
+  },
+]
 ```
 
 Or with `html-loader` and a SVGO configuration. By default `markup-inline-loader` only enables the removeTitle plugin. You can overwrite this default behavior with following example:
 
 ```js
-{
-  test: /\.html$/,
-  use: [
-    'html-loader',
-    {
-      loader: 'markup-inline-loader',
-      options: {
-        svgo: {
-          plugins: [
-            {
-              removeTitle: true,
-            },
-            {
-              removeUselessStrokeAndFill: false,
-            },
-            {
-              removeUnknownsAndDefaults: false,
-            },
-          ],
+const rules = [
+  {
+    test: /\.html$/,
+    use: [
+      'html-loader',
+      {
+        loader: 'markup-inline-loader',
+        options: {
+          svgo: {
+            plugins: [
+              {
+                removeTitle: true,
+              },
+              {
+                removeUselessStrokeAndFill: false,
+              },
+              {
+                removeUnknownsAndDefaults: false,
+              },
+            ],
+          },
         },
       },
-    },
-  ],
-},
+    ],
+  },
+];
+```
+
+We can also limit that it applies only to elements with specific attribute. e.g.
+
+```
+const rules = [
+  {
+    test: /\.html$/,
+    use: [
+      'html-loader',
+      'markup-inline-loader?strict=[markup-inline]',
+    ],
+];
+```
+
+will apply to
+
+```html
+  <img markup-inline src="./_images/camera.svg" />
+```
+
+and
+
+```html
+  <img data-markup-inline src="./_images/camera.svg" />
+```
+
+but not apply to:
+
+```html
+  <img src="./_images/camera.svg" />
 ```
 
 ### Original HTML
 
 ```html
-<img class="icon" height="1em" src="../%common/images/icons/camera.svg" />
+<img class="icon" height="1em" src="./_images/camera.svg" />
 ```
 
 ### Translated HTML

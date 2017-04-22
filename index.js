@@ -18,16 +18,18 @@ module.exports = function (content) {
   const loader = this;
   const options = loaderUtils.getOptions(this) || {};
   const svgo = new SVGO(options.svgo || SVGOConfiguration);
+  const strict = options.strict;
 
   content = content.replace(PATTERN, replacer);
   return content;
 
-  function replacer(match, element, preAttributes, fileName, postAttributes) {
+  function replacer(matched, tagName, preAttributes, fileName, postAttributes) {
     const isSvgFile = path.extname(fileName).toLowerCase() === '.svg';
-    const isImg = element.toLowerCase() === 'img';
+    const isImg = tagName.toLowerCase() === 'img';
+    const meetStrict = !strict || new RegExp(`[^\w-](data-)?${options.strict}[^\w-]`).test(matched);
 
-    if (!isSvgFile && isImg) {
-      return match;
+    if (!isSvgFile && isImg || !meetStrict) {
+      return matched;
     }
 
     const filePath = loaderUtils.urlToRequest(path.join(loader.context, fileName), '/');
