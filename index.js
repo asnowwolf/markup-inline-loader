@@ -1,10 +1,11 @@
-var PATTERN = /<(svg|img|math)\s+(.*?)src(\s*)=(\s*)"(.*?)"(.*?)\/?>/gi;
+const PATTERN = /<(svg|img|math)\s+(.*?)src(\s*)=(\s*)"(.*?)"(.*?)\/?>/gi;
 
-var fs = require('fs');
-var path = require('path');
-var SVGO = require('svgo');
+import fs from 'fs';
+import path from 'path';
+import SVGO from 'svgo';
+import loaderUtils from 'loader-utils';
 
-var SVGOConfiguration = {
+const SVGOConfiguration = {
   plugins: [
     {
       removeTitle: true,
@@ -14,30 +15,30 @@ var SVGOConfiguration = {
 
 module.exports = function (content) {
   this.cacheable && this.cacheable();
-  var loader = this;
-  var loaderUtils = require('loader-utils');
-  var options = loaderUtils.getOptions(this) || {};
-  var svgo = new SVGO(options.svgo || SVGOConfiguration);
+  const loader = this;
+  const options = loaderUtils.getOptions(this) || {};
+  const svgo = new SVGO(options.svgo || SVGOConfiguration);
 
-  content = content.replace(PATTERN, function (match, element, preAttributes, space1, space2, fileName, postAttributes) {
-    var isSvgFile = path.extname(fileName).toLowerCase() === '.svg';
-    var isImg = element.toLowerCase() === 'img';
-
-    if (!isSvgFile && isImg) {
-      return match;
-    }
-
-    var filePath = path.join(loader.context, fileName);
-    filePath = loaderUtils.urlToRequest(filePath, '/');
-    loader.addDependency(filePath);
-    var fileContent = fs.readFileSync(filePath, {encoding: 'utf-8'});
-    if (isSvgFile) {
-      // It's callback, But it's sync
-      svgo.optimize(fileContent, function (result) {
-        fileContent = result.data;
-      });
-    }
-    return fileContent.replace(/^<svg/, '<svg ' + preAttributes + postAttributes + ' ');
-  });
+  content = content.replace(PATTERN, replacer);
   return content;
 };
+
+function replacer(match, element, preAttributes, space1, space2, fileName, postAttributes) {
+  const isSvgFile = path.extname(fileName).toLowerCase() === '.svg';
+  const isImg = element.toLowerCase() === 'img';
+
+  if (!isSvgFile && isImg) {
+    return match;
+  }
+
+  const filePath = loaderUtils.urlToRequest(path.join(loader.context, fileName));
+  loader.addDependency(filePath);
+  let fileContent = fs.readFileSync(filePath, {encoding: 'utf-8'});
+  if (isSvgFile) {
+    // It's callback, But it's sync
+    svgo.optimize(fileContent, function (result) {
+      fileContent = result.data;
+    });
+  }
+  return fileContent.replace(/^<svg/, '<svg ' + preAttributes + postAttributes + ' ');
+}
