@@ -34,8 +34,8 @@ module.exports = function (content) {
     loader.addDependency(filePath);
     let fileContent = fs.readFileSync(filePath, {encoding: 'utf-8'});
     if (isSvgFile) {
-      // It's callback, But it's sync
-      svgo.optimize(fileContent, function (result) {
+      // It's callback, But it's sync call, So, we needn't use async loader
+      svgo.optimize(fileContent, (result) => {
         fileContent = result.data;
       });
     }
