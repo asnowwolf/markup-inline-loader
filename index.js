@@ -16,9 +16,9 @@ const SVGOConfiguration = {
 module.exports = function (content) {
   this.cacheable && this.cacheable();
   const loader = this;
-  const options = loaderUtils.getOptions(this) || {};
+  const options = Object.assign({strict: '[markup-inline]'}, loaderUtils.getOptions(this));
   const svgo = new SVGO(options.svgo || SVGOConfiguration);
-  const strict = options.strict;
+  const strict = options.strict.replace(/\[(data-)?([\w-]+)\]/, '$2');
 
   content = content.replace(PATTERN, replacer);
   return content;
@@ -26,7 +26,7 @@ module.exports = function (content) {
   function replacer(matched, tagName, preAttributes, fileName, postAttributes) {
     const isSvgFile = path.extname(fileName).toLowerCase() === '.svg';
     const isImg = tagName.toLowerCase() === 'img';
-    const meetStrict = !strict || new RegExp(`[^\w-](data-)?${options.strict}[^\w-]`).test(matched);
+    const meetStrict = !strict || new RegExp(`[^\w-](data-)?${strict}[^\w-]`).test(matched);
 
     if (!isSvgFile && isImg || !meetStrict) {
       return matched;
@@ -41,6 +41,6 @@ module.exports = function (content) {
         fileContent = result.data;
       });
     }
-    return fileContent.replace(/^<svg/, '<svg ' + preAttributes + postAttributes + ' ');
+    return fileContent.replace(/^<(svg|math)/, '<$1 ' + preAttributes + postAttributes + ' ');
   }
 };
