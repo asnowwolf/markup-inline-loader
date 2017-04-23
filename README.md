@@ -6,7 +6,7 @@ This is a webpack loader. It can inline SVG or MathML file to HTML, so that you 
 
 ### v0.2
 
-In previous versions, the `strict` option defaults to '', which means that it will handle all svg pictures. But it easily leads to unexpected results, and now we set it to `markup-inline', which means `svg[markup-inline], img[markup-inline], math[markup-inline], svg[data-markup-inline], img[data-markup-inline], math[data-markup-inline]`. 
+In previous versions, the `strict` option defaults to '', which means that it will handle all svg pictures. But it easily leads to unexpected results, and now we set it to `[markup-inline]`: `svg[markup-inline], img[markup-inline], math[markup-inline], svg[data-markup-inline], img[data-markup-inline], math[data-markup-inline]`. 
 
 All elements that do not match these selectors are ignored.
 
