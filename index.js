@@ -1,3 +1,5 @@
+"use strict"
+
 const PATTERN = /<(svg|img|math)\s+(.*?)src\s*=\s*"(.*?)"(.*?)\/?>/gi;
 
 const fs = require('fs');
