@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const PATTERN = /<(svg|img|math)\s+([\s\S]*?)src\s*=\s*"(.*?)"([\s\S]*?)\/?>/gi;
+const PATTERN = /<(svg|img|math)\s+([^>]*?)src\s*=\s*"([^>]*?)"([^>]*?)\/?>/gi;
 
 const fs = require('fs');
 const path = require('path');
@@ -18,7 +18,7 @@ const SVGOConfiguration = {
 module.exports = function (content) {
   this.cacheable && this.cacheable();
   const loader = this;
-  const options = Object.assign({strict: '[markup-inline]'}, loaderUtils.getOptions(this));
+  const options = Object.assign({ strict: '[markup-inline]' }, loaderUtils.getOptions(this));
   const svgo = new SVGO(options.svgo || SVGOConfiguration);
   const strict = options.strict.replace(/\[(data-)?([\w-]+)\]/, '$2');
 
@@ -36,7 +36,7 @@ module.exports = function (content) {
 
     const filePath = loaderUtils.urlToRequest(path.join(loader.context, fileName), '/');
     loader.addDependency(filePath);
-    let fileContent = fs.readFileSync(filePath, {encoding: 'utf-8'});
+    let fileContent = fs.readFileSync(filePath, { encoding: 'utf-8' });
     if (isSvgFile) {
       // It's callback, But it's sync call, So, we needn't use async loader
       svgo.optimize(fileContent, (result) => {
