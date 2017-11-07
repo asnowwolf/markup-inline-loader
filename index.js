@@ -1,6 +1,6 @@
 "use strict"
 
-const PATTERN = /<(svg|img|math)\s+(.*?)src\s*=\s*"(.*?)"(.*?)\/?>/gi;
+const PATTERN = /<(svg|img|math)\s+([\s\S]*?)src\s*=\s*"(.*?)"([\s\S]*?)\/?>/gi;
 
 const fs = require('fs');
 const path = require('path');

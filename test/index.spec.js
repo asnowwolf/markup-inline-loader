@@ -10,7 +10,7 @@ function load(content, strict) {
     context: __dirname,
   };
   if (strict) {
-    options.query = {strict: strict};
+    options.query = { strict: strict };
   }
   return loader.call(options, content);
 }
@@ -27,6 +27,9 @@ describe('markup inline loader', () => {
   });
   it('should inline img[src$=.svg]', () => {
     load('<img markup-inline src="./basic.svg" />').trim().should.equal(basicSvgContent);
+  });
+  it('should inline img[src$=.svg] in multi-line', () => {
+    load('<img markup-inline\n src="./basic.svg" />').trim().replace(/\n/g, '').should.equal(basicSvgContent);
   });
   it('should inline math[src]', () => {
     load('<math markup-inline src="./test.mml" />').trim().should.equal('<math markup-inline    style="display: block;"></math>');
