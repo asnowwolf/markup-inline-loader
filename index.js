@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const PATTERN = /<(svg|img|math)\s+([\s\S]*?)src\s*=\s*"(.*?)"([\s\S]*?)\/?>/gi;
 
