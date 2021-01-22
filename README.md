@@ -23,6 +23,8 @@ const rules = [
 ];
 ```
 
+It will inline the svg file and return the inlined html (instead of js format)
+
 Or with `html-loader`:
 
 ```js

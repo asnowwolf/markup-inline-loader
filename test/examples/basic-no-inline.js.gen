@@ -1,0 +1,8 @@
+// Imports
+var ___HTML_LOADER_GET_SOURCE_FROM_IMPORT___ = require("../../node_modules/html-loader/dist/runtime/getUrl.js");
+var ___HTML_LOADER_IMPORT_0___ = require("./images/basic.svg");
+// Module
+var ___HTML_LOADER_REPLACEMENT_0___ = ___HTML_LOADER_GET_SOURCE_FROM_IMPORT___(___HTML_LOADER_IMPORT_0___);
+var code = "<svg src=\"images/basic.svg\"/> <img src=\"" + ___HTML_LOADER_REPLACEMENT_0___ + "\" data-my-strict/> ";
+// Exports
+module.exports = code;

@@ -1,0 +1,4 @@
+// Module
+var code = "<math markup-inline style=\"display:block\"></math> ";
+// Exports
+module.exports = code;
