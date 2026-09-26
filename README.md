@@ -1,3 +1,15 @@
+---
+title: What's this?
+type: archive
+status: archived
+target: 80-archive/stale-tools-20260925/markup-inline-loader
+---
+
+## 项目档案（2026-09-24 调研）
+- 内联SVG/MathML的webpack loader。
+- 技术栈：JS/Webpack。
+- 状态：stale。
+
 # What's this?
 
 This is a webpack loader. It can inline SVG or MathML file to HTML, so that you can apply css to embedded svg.
